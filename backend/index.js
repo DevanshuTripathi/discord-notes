@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5173', // or 3000
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // or 3000
 }));
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
@@ -97,6 +97,8 @@ app.delete('/delete-note', async (req, res) => {
     }
 });
 
-app.listen(3001, () => {
-    console.log('Backend is running on http://localhost:3001');
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`Backend is running on port ${PORT}`);
 });
