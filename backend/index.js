@@ -10,8 +10,12 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173', // or 3000
+  origin: [
+    'http://localhost:5173',
+    'https://your-vercel-app.vercel.app',
+  ],
 }));
+
 
 const bot = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages] });
 
