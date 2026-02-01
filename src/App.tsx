@@ -14,13 +14,13 @@ function App() {
   const [content, setContent] = useState('')
 
   const fetchNotes = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_BACKEND}/get-notes`)
+    const res = await axios.get(`${import.meta.env.BACKEND}/get-notes`)
     setNotes(res.data)
   }
 
   const addNote = async () => {
     if (!subject.trim() || !content.trim()) return alert('Empty notes? Really?')
-    await axios.post(`${import.meta.env.VITE_BACKEND}/add-note`, {
+    await axios.post(`${import.meta.env.BACKEND}/add-note`, {
       subject,
       content,
     })
@@ -30,7 +30,7 @@ function App() {
   }
 
   const deleteNote = async (id: string) => {
-    await axios.delete(`${import.meta.env.VITE_BACKEND}/delete-note`, {
+    await axios.delete(`${import.meta.env.BACKEND}/delete-note`, {
       data: { id },
     })
     fetchNotes()
@@ -42,7 +42,7 @@ function App() {
 
     if (!newSubject || !newContent) return
 
-    await axios.post(`${import.meta.env.VITE_BACKEND}/edit-note`, {
+    await axios.post(`${import.meta.env.BACKEND}/edit-note`, {
       id: note.id,
       subject: newSubject,
       content: newContent,
